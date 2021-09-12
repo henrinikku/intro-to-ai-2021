@@ -1,3 +1,4 @@
+from collections import deque
 import json
 import os
 
@@ -8,23 +9,24 @@ def load_data(source_file):
     :return: obj (array)
     """
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    with open(os.path.join(dir_path, '..', source_file)) as file:
+    with open(os.path.join(dir_path, "..", source_file)) as file:
         return json.load(file)
 
 
 class State:
-    """ State lets you trace back the route from the last stop
+    """State lets you trace back the route from the last stop
     :attr stop: Code of the stop (str)
     :attr previous: Previous state of the route (State)
     """
+
     def __init__(self, stop, previous=None):
         self.stop = stop
         self.previous = previous
 
-    """ Returns route as a string from the last stop to the beginning. 
-        Format: 1030423 -> 1010420 -> 1010427 
-    """
     def __str__(self):
+        """Returns route as a string from the last stop to the beginning.
+        Format: 1030423 -> 1010420 -> 1010427
+        """
         result = self.stop
         state = self.previous
         while state is not None:
@@ -45,6 +47,7 @@ class CityMap:
     :attr data: (obj)
     :attr stops: dictionary {stop_code: stop}
     """
+
     def __init__(self, source_file):
         self.data = load_data(source_file)
         self.stops = {}
@@ -52,11 +55,11 @@ class CityMap:
             self.stops[stop["code"]] = stop
 
     def get_neighbors(self, stop_code):
-        """Returns dictionary containing all neighbor stops """
+        """Returns dictionary containing all neighbor stops"""
         return self.stops.get(stop_code)["neighbors"]
 
     def get_neighbors_codes(self, stop_code):
-        """Returns codes of all neighbor stops """
+        """Returns codes of all neighbor stops"""
         return list(self.stops.get(stop_code)["neighbors"].keys())
 
     def search(self, start, goal):
@@ -68,5 +71,19 @@ class CityMap:
         :param goal: Code of the last stop (str)
         :returns (obj)
         """
+        seen = set()
+        queue = deque([State(start)])
+        while queue:
+            node = queue.popleft()
+            if node.stop in seen:
+                continue
+
+            if node.stop == goal:
+                return node
+
+            seen.add(node.stop)
+            queue.extend(
+                State(stop, node) for stop in self.get_neighbors_codes(node.stop)
+            )
 
         return None
