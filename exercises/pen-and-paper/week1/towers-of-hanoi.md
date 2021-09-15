@@ -46,6 +46,6 @@
 
 - BFS found the shortest path (7), which is much shorter than the path found by DFSs
 - BFS found the path in 20 steps whereas DFS needed only 15 steps -- DFS was clearly faster in this regard
-- The traversal was done by first adding the leftmost neighbours of each node to the list.
+- Traversals were done by first adding the leftmost neighbours of each node to the list.
 - The order in which the neighbors of each node are added into the queue can greatly affect the path found and the steps taken by DFS.
 - BFS, on the other hand, will always find the shortest path, altough the ordering of the edges of the graph still has an impact on the total steps taken by the algorithm.
