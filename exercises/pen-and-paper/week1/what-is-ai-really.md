@@ -7,7 +7,7 @@ I chose to read "Artificial Intelligence for Social Impact: Learning and Plannin
 
 ## Questions
 ### What is the research problem?
-How to efficiently apply advancements in AI research to further societal improvement.
+How to efficiently apply advancements in AI research to promote societal improvement.
 
 ### Is the topic related to the topics of this course?
 Yes, I guess, since the course is about AI and the paper is about its applications.
