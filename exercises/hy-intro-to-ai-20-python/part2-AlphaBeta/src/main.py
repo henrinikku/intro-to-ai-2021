@@ -1,12 +1,21 @@
+import timeit
+
 from alphabeta import TicTacToe
 from alphabeta import alpha_beta_value
 
 
-def play(state):
+def play(state: TicTacToe):
     """Makes turn and prints the result of it until the game is over
     :param state: The initial state of the game (TicTacToe)
     """
-    # Implement me
+    while not state.is_end_state():
+        state = (
+            max(state.generate_children(), key=alpha_beta_value)
+            if state.is_max_node()
+            else min(state.generate_children(), key=alpha_beta_value)
+        )
+        print(state)
+
 
 def main():
     """You need to implement the following functions/methods:
@@ -17,11 +26,14 @@ def main():
     max_value(node, alpha, beta): implements the MinMax algorithm with alpha-beta pruning
     min_value(node, alpha, beta):implements the MinMax algorithm with alpha-beta pruning
     """
-    empty_board = 3 * '???'
-    state = TicTacToe(empty_board, True)
+    empty_board = 3 * "???"
+    state = TicTacToe("oxox?x?o?", False)
     print(state)
+    start = timeit.default_timer()
     play(state)
+    end = timeit.default_timer()
+    print(f"Took {end - start} seconds")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
