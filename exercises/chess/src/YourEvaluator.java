@@ -100,13 +100,14 @@ public class YourEvaluator extends Evaluator {
 
 	public double eval(Position p) {
 		double value = 0;
+		boolean endgame = isEndgame(p);
 		for(int x = 0; x < p.board.length; ++x) {
 			for(int y = 0; y < p.board[x].length; ++y) {
 				int piece = p.board[x][y];
 				value += pieceValues[piece];
 
 				double[][] pieceTable = pieceTables[piece];
-				if (isEndgame(p)) {
+				if (endgame) {
 					if (piece == Position.WKing)
 						pieceTable = kingTableEndGame;
 					if (piece == Position.BKing)
