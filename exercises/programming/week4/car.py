@@ -1,6 +1,5 @@
 import logging
 from dataclasses import dataclass
-from collections import namedtuple
 from random import random
 from typing import List
 
