@@ -187,8 +187,8 @@ public class SurfCompare extends JPanel {
     
     // This is the main method you want to run
     public static void main(String[] args) throws IOException {
-        BufferedImage imageA = ImageIO.read(new File("example/img1.jpg"));
-        BufferedImage imageB = ImageIO.read(new File("example/img2.jpg"));
+        BufferedImage imageA = ImageIO.read(new File("example/dwight1.jpg"));
+        BufferedImage imageB = ImageIO.read(new File("example/dwight2.jpg"));
         //Pass images paths as parameters
         //BufferedImage imageA = ImageIO.read(new File(args[0]));
         //BufferedImage imageB = ImageIO.read(new File(args[1]));
